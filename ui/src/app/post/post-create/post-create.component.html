@@ -1,0 +1,55 @@
+<!-- <textarea rows="6" [value]="newPost" #postInput></textarea> -->
+
+<!-- Bellow is comented as this is now changed to form with submit button -->
+<!--
+<mat-card>
+  <form>
+    <mat-form-field>
+      <input 
+      matInput
+      type="text"
+      name="title"
+      ngModel>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput rows="2" [(ngModel)]="enteredContent"></textarea>
+    </mat-form-field>  
+    <button mat-raised-button
+    color="primary"
+    (click)="onAddPost()">Save Post</button>
+  </form>
+</mat-card>
+-->
+
+<mat-card>
+    <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+      <mat-form-field>
+        <input 
+        matInput
+        type="text"
+        name="title"
+        ngModel
+        required
+        minlength="3"
+        placeholder="Post Title"
+        #title="ngModel">
+        <mat-error *ngIf="title.invalid">Please enter <b>title</b> with minimum length 3.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+        matInput
+        rows="2"
+        name="content"
+        placeholder="Post Content"
+        ngModel
+        required
+        minlength="4"
+        #cnt></textarea>
+        <br>Content:{{cnt.invalid}}
+        <mat-error *ngIf="cnt.invalid">Please enter <b>content</b> with minimum length 4.</mat-error>        
+      </mat-form-field>
+      <button mat-raised-button
+      color="primary"
+      type="submit">Save Post</button>
+    </form>
+  </mat-card>
